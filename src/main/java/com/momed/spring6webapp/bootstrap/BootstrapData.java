@@ -2,8 +2,10 @@ package com.momed.spring6webapp.bootstrap;
 
 import com.momed.spring6webapp.domain.Author;
 import com.momed.spring6webapp.domain.Book;
+import com.momed.spring6webapp.domain.Publisher;
 import com.momed.spring6webapp.repositories.AuthorRepoistory;
 import com.momed.spring6webapp.repositories.BookRepository;
+import com.momed.spring6webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,12 @@ public class BootstrapData implements CommandLineRunner {
 
     private final AuthorRepoistory authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootstrapData(AuthorRepoistory authorRepoistory, BookRepository bookrepository) {
+    public BootstrapData(AuthorRepoistory authorRepoistory, BookRepository bookrepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepoistory;
         this.bookRepository = bookrepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -48,9 +52,18 @@ public class BootstrapData implements CommandLineRunner {
         authorRepository.save(ericSaved);
         authorRepository.save(tedSaved);
 
+        Publisher tedpub = new Publisher();
+        tedpub.setAddress("1378 Stemple Pass Rd");
+        tedpub.setCity("Lincoln");
+        tedpub.setState("MT");
+        tedpub.setZip("59639");
+
+        publisherRepository.save(tedpub);
+
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
     }
 }
