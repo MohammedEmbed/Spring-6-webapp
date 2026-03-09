@@ -35,6 +35,13 @@ public class BootstrapData implements CommandLineRunner {
         Author tedSaved = authorRepository.save(ted);
         Book isaifSaved = bookRepository.save(isaif);
 
+        Publisher tedpub = new Publisher();
+        tedpub.setAddress("1378 Stemple Pass Rd");
+        tedpub.setCity("Lincoln");
+        tedpub.setState("MT");
+        tedpub.setZip("59639");
+        Publisher tedpubSaved = publisherRepository.save(tedpub);
+
         Author eric = new Author();
         ted.setLastName("Eric");
         ted.setFirstName("Evans");
@@ -46,19 +53,18 @@ public class BootstrapData implements CommandLineRunner {
         Author ericSaved = authorRepository.save(eric);
         Book dddSaved = bookRepository.save(ddd);
 
+        isaifSaved.setPublisher(tedpubSaved);
+        dddSaved.setPublisher(tedpubSaved);
+
+        bookRepository.save(dddSaved);
+        bookRepository.save(isaifSaved);
+
         tedSaved.getBooks().add(isaifSaved);
         ericSaved.getBooks().add(dddSaved);
 
         authorRepository.save(ericSaved);
         authorRepository.save(tedSaved);
 
-        Publisher tedpub = new Publisher();
-        tedpub.setAddress("1378 Stemple Pass Rd");
-        tedpub.setCity("Lincoln");
-        tedpub.setState("MT");
-        tedpub.setZip("59639");
-
-        publisherRepository.save(tedpub);
 
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
