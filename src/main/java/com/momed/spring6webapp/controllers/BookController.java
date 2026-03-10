@@ -1,6 +1,5 @@
 package com.momed.spring6webapp.controllers;
 
-import com.momed.spring6webapp.domain.Book;
 import com.momed.spring6webapp.services.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
